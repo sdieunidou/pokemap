@@ -3,6 +3,7 @@ import urllib2
 import json
 import os
 import time
+import shutil
 
 lastLat = ""
 lastLng = ""
@@ -30,7 +31,8 @@ def generateXML():
 			gpx = ET.Element("gpx", version="1.1", creator="Xcode")
 			wpt = ET.SubElement(gpx, "wpt", lat=str(geo["lat"]), lon=str(geo["lng"]))
 			ET.SubElement(wpt, "name").text = "PokemonLocation"
-			ET.ElementTree(gpx).write("pokemonLocation.gpx")
+			ET.ElementTree(gpx).write("pokemonLocation_tpm.gpx")
+			shutil.copy("pokemonLocation_tpm.gpx", "pokemonLocation.gpx")
 			print "Location Updated!", "latitude:", geo["lat"], "longitude:" ,geo["lng"]
 			clickAction()
 
